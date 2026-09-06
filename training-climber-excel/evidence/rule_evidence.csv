@@ -1,0 +1,18 @@
+RuleID,RulesetVersion,SourceID,RelationType,EvidenceStrength,Notes
+R-SAFE-001,1.0.0-candidate,E005,SAFETY,LOW,Precaución conservadora; la revisión no valida un umbral de dolor específico
+R-SAFE-002,1.0.0-candidate,E005,SAFETY,LOW,Historia y síntomas justifican cribado pero no diagnóstico
+R-SAFE-002,1.0.0-candidate,E006,INDIRECT_SUPPORT,MODERATE,Consenso general de gestión de carga
+R-ELIG-001,1.0.0-candidate,E001,BACKGROUND,MODERATE,Apoya entrenamiento específico; no el umbral de dos años
+R-ELIG-001,1.0.0-candidate,E002,BACKGROUND,MODERATE,Apoya fuerza semiespecífica; elegibilidad exacta incierta
+R-SEL-001,1.0.0-candidate,E001,DIRECT_SUPPORT,MODERATE,Apoya entrenamiento específico como categoría
+R-SEL-002,1.0.0-candidate,E002,DIRECT_SUPPORT,MODERATE,Apoya fuerza complementaria
+R-SEL-002,1.0.0-candidate,E007,INDIRECT_SUPPORT,MODERATE,Dosis general no específica
+R-SEL-003,1.0.0-candidate,E007,BACKGROUND,LOW,Extrapolación; no demuestra beneficio de antagonistas en escalada
+R-SEL-004,1.0.0-candidate,E001,DIRECT_SUPPORT,MODERATE,Apoya trabajo específico; no dosis única
+R-PRE-001,1.0.0-candidate,E001,BACKGROUND,LOW,La heterogeneidad impide dosis exacta
+R-PRE-001,1.0.0-candidate,E002,BACKGROUND,LOW,La heterogeneidad impide dosis exacta
+R-PRE-001,1.0.0-candidate,E007,INDIRECT_SUPPORT,MODERATE,Rangos generales de fuerza
+R-PRE-002,1.0.0-candidate,E008,INDIRECT_SUPPORT,MODERATE,No existe superioridad consistente del fallo
+R-ADAPT-001,1.0.0-candidate,E006,INDIRECT_SUPPORT,MODERATE,Monitorización de carga y bienestar; umbrales heurísticos
+R-ADAPT-002,1.0.0-candidate,E006,BACKGROUND,LOW,No respalda los umbrales concretos
+R-TEST-001,1.0.0-candidate,E004,DIRECT_SUPPORT,HIGH,Fiabilidad de MIFS en borde fijo de aproximadamente 20–23 mm

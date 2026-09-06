@@ -1,0 +1,6 @@
+ParameterID,Category,Name,Value,Unit,RulesetVersion,EvidenceIDs,EvidenceStatus
+P_MAX_STRENGTH_SETS,FingerStrength,Series fuerza máxima,4,series,1.0.0-candidate,E001|E002,UNCERTAIN
+P_MAX_STRENGTH_REST,Recovery,Descanso entre series,180,seconds,1.0.0-candidate,E007,INDIRECT_EVIDENCE
+P_TARGET_RPE,Intensity,RPE objetivo submáximo,8,RPE,1.0.0-candidate,E008,INDIRECT_EVIDENCE
+P_GENERAL_REPS,Strength,Repeticiones generales,8,reps,1.0.0-candidate,E007,INDIRECT_EVIDENCE
+P_REEVAL_WEEKS,Evaluation,Intervalo sugerido,6,weeks,1.0.0-candidate,,EXPERT_HEURISTIC

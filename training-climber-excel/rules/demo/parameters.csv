@@ -1,0 +1,5 @@
+ParameterID,Category,Name,Value,Unit,RulesetVersion,EvidenceIDs,EvidenceStatus
+P_SETS,Demo,Series,3,series,0.1.0-demo,,DESIGN_DECISION
+P_REPS,Demo,Repeticiones,6,reps,0.1.0-demo,,DESIGN_DECISION
+P_REST,Demo,Descanso,180,seconds,0.1.0-demo,,DESIGN_DECISION
+P_RPE,Demo,RPE objetivo,8,RPE,0.1.0-demo,,DESIGN_DECISION

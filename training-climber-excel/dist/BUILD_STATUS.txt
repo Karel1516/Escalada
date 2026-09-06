@@ -1,0 +1,4 @@
+﻿Workbook=C:\Users\padil\Documents\Escalada\training-climber-excel\dist\Entrenamiento_Escalada.xlsm
+Created=2026-09-06T04:28:29.2484332-06:00
+VBAEmbedded=True
+SourceModules=20

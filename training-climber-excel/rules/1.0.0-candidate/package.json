@@ -1,0 +1,7 @@
+{
+  "name": "Candidate",
+  "version": "1.0.0-candidate",
+  "status": "RESEARCH",
+  "description": "Candidato conservador informado por evidencia; pendiente de revisión y activación humana.",
+  "immutable": true
+}

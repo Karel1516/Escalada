@@ -1,0 +1,13 @@
+RuleID,RuleType,Priority,Description,Classification,EvidenceStatus,SourceIDs,Rationale,Enabled
+R-SAFE-001,SAFETY,1000,Excluir carga específica de dedos ante dolor,SAFETY_PRECAUTION,UNCERTAIN,E005,La evidencia preventiva es limitada; se adopta precaución conservadora y no diagnóstica,TRUE
+R-SAFE-002,SAFETY,990,Bloquear progresión ante dolor limitante,SAFETY_PRECAUTION,UNCERTAIN,E005|E006,Evita que rendimiento reactive una carga bloqueada y solicita valoración,TRUE
+R-ELIG-001,ELIGIBILITY,600,Hangboard solo con experiencia equipo y ausencia de dolor,CONSENSUS,UNCERTAIN,E001|E002,La intervención puede ser útil pero la literatura no fija un umbral universal de experiencia,TRUE
+R-SEL-001,PRESCRIPTION,500,Incluir técnica submáxima,EXPERT_HEURISTIC,UNCERTAIN,E001,La especificidad apoya incluir escalada pero la dosis es configurable,TRUE
+R-SEL-002,PRESCRIPTION,480,Incluir tracción para fuerza general,INDIRECT_EVIDENCE,INDIRECT,E002|E007,La revisión apoya fuerza complementaria; el esquema concreto se extrapola,TRUE
+R-SEL-003,PRESCRIPTION,470,Incluir empuje antagonista,EXPERT_HEURISTIC,UNCERTAIN,E007,Equilibrio general plausible sin evidencia directa de mejora en escalada,TRUE
+R-SEL-004,PRESCRIPTION,460,Incluir resistencia específica para deportiva,INDIRECT_EVIDENCE,UNCERTAIN,E001,Intervenciones específicas pueden ayudar pero la dosis óptima no está establecida,TRUE
+R-PRE-001,PRESCRIPTION,400,Prescripción de fuerza de dedos candidata,INDIRECT_EVIDENCE,UNCERTAIN,E001|E002|E007,Series y descanso son un rango conservador extrapolado; requieren validación,TRUE
+R-PRE-002,PRESCRIPTION,390,Evitar fallo sistemático,INDIRECT_EVIDENCE,INDIRECT,E008,El fallo no muestra superioridad consistente y puede elevar fatiga,TRUE
+R-ADAPT-001,SAFETY,800,Descarga por fatiga dolor o baja adherencia,SAFETY_PRECAUTION,UNCERTAIN,E006,Monitorizar carga y bienestar; el umbral exacto es heurístico,TRUE
+R-ADAPT-002,PREFERENCE,100,Progresar con cumplimiento y esfuerzo tolerable,EXPERT_HEURISTIC,UNCERTAIN,E006,Regla configurable sin umbral universal validado,TRUE
+R-TEST-001,ELIGIBILITY,300,Seleccionar prueba MIFS de 20 mm cuando elegible,DIRECT_EVIDENCE,DIRECT,E004,La revisión reciente respalda su fiabilidad para monitorización,TRUE
