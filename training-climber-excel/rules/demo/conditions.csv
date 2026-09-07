@@ -1,9 +1,0 @@
-ConditionID,RuleID,GroupID,Field,Operator,Value1,Value2
-C001,D-SAFE-001,1,FingerPain,GTE,1,
-C002,D-SAFE-002,1,PainStatus,IN,limitación|lesión/rehabilitación,
-C003,D-SEL-002,1,PrimaryObjective,EQ,Fuerza de dedos,
-C004,D-SEL-002,1,ExperienceYears,GTE,2,
-C005,D-SEL-002,1,Equipment,IN,Hangboard|Muro|Hangboard|Barra,
-C006,D-SEL-002,1,FingerPain,EQ,0,
-C007,D-PREF-001,1,Completion,GTE,90,
-C008,D-PREF-001,1,SessionRPE,LTE,8,

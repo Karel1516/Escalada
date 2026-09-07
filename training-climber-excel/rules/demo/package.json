@@ -1,7 +1,0 @@
-{
-  "name": "DEMO",
-  "version": "0.1.0-demo",
-  "status": "TESTING",
-  "description": "Paquete artificial para pruebas técnicas; no validado para prescripción.",
-  "immutable": true
-}

@@ -1,7 +1,0 @@
-RuleID,RuleType,Priority,Description,Classification,EvidenceStatus,SourceIDs,Rationale,Enabled
-D-SAFE-001,SAFETY,1000,Bloquear hangboard con dolor de dedos,SAFETY_PRECAUTION,UNCERTAIN,E005,Precaución conservadora; el sistema no diagnostica,TRUE
-D-SAFE-002,SAFETY,999,Mostrar aviso por dolor limitante,SAFETY_PRECAUTION,UNCERTAIN,E005,Derivar a valoración profesional ante limitación,TRUE
-D-SEL-001,PRESCRIPTION,100,Incluir técnica siempre,DESIGN_DECISION,N/A,,Garantiza una ruta funcional de prueba,TRUE
-D-SEL-002,PRESCRIPTION,90,Incluir hangboard para objetivo y equipo,EXPERT_HEURISTIC,UNCERTAIN,,Regla artificial para probar condiciones compuestas,TRUE
-D-PRE-001,PRESCRIPTION,80,Prescribir series repeticiones descanso y RPE,DESIGN_DECISION,N/A,,Valores de prueba del motor sin pretensión científica,TRUE
-D-PREF-001,PREFERENCE,10,Permitir progresión con feedback favorable,DESIGN_DECISION,N/A,,Prueba técnica de la acción,TRUE

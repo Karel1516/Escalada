@@ -1,15 +1,20 @@
 # PROYECTO
+
 Sistema versionado de prescripción de entrenamiento para escaladores
-Excel + VBA + motor de reglas + base de evidencia
+
+Aplicación de escritorio en Python + motor de reglas + base de datos + base de evidencia
 
 # OBJETIVO
 
-Construye desde cero un sistema funcional en Excel habilitado para macros (.xlsm)
+Construye desde cero una aplicación de escritorio funcional desarrollada en Python
+
 capaz de generar, registrar, adaptar y auditar programas de entrenamiento para escaladores.
 
 NO construyas una simple plantilla.
 
-El resultado debe comportarse como una pequeña aplicación de escritorio dentro de Excel.
+El resultado debe ser una aplicación de escritorio autónoma, instalable y utilizable sin Excel.
+
+No debe exigir que el usuario instale Python ni ejecute comandos para usar la versión distribuida.
 
 El usuario proporciona datos.
 
@@ -21,14 +26,18 @@ El conocimiento deportivo vive principalmente en Rulesets versionados.
 
 El código ejecuta las reglas.
 
-Las tablas contienen el conocimiento.
+Las tablas de la base de datos y los paquetes de reglas contienen el conocimiento.
 
 Cada decisión importante debe poder rastrearse hasta:
 
 - una regla;
+
 - uno o varios parámetros;
+
 - una versión del Ruleset;
+
 - y, cuando corresponda, evidencia bibliográfica.
+
 
 
 # PRINCIPIO RECTOR
@@ -44,85 +53,141 @@ LAS FUENTES JUSTIFICAN LAS REGLAS.
 EL HISTORIAL CONSERVA QUÉ VERSIÓN TOMÓ CADA DECISIÓN.
 
 
+
 # ROL
 
 Actúa como:
 
 - arquitecto de software;
-- desarrollador senior de Excel/VBA;
-- desarrollador Python cuando sea útil para construir o probar el archivo;
+
+- desarrollador senior de Python;
+
+- arquitecto de aplicaciones de escritorio con PySide6;
+
+- especialista en SQLAlchemy, SQLite y migraciones de datos;
+
 - especialista en motores de reglas;
+
 - diseñador de modelos de datos;
+
 - especialista en testing;
+
 - investigador técnico;
+
 - especialista en programación del entrenamiento;
+
 - preparador físico especializado en escalada.
 
 No supongas que tus conocimientos internos son suficientes para establecer
+
 prescripciones deportivas.
 
 Cuando una decisión deportiva requiera evidencia, INVESTIGA antes de convertirla
+
 en una regla de producción.
 
 
+
 ======================================================================
+
 1. ARQUITECTURA GENERAL
+
 ======================================================================
 
 Separar estrictamente:
 
 1. DATOS DEL USUARIO
+
 2. BASE DE EJERCICIOS
+
 3. MOTOR DE REGLAS
+
 4. RULESETS
+
 5. PARÁMETROS
+
 6. EVIDENCIA
+
 7. PLANES GENERADOS
+
 8. HISTORIAL
+
 9. FEEDBACK
+
 10. TRAZABILIDAD
+
 11. INTERFAZ
+
 12. REPORTES
+
 
 
 Conceptualmente:
 
 USUARIO
+
 +
+
 CONTEXTO ACTUAL
+
 +
+
 RULESET
+
 +
+
 PARÁMETROS
+
 +
+
 BASE DE EJERCICIOS
+
 =
+
 PRESCRIPCIÓN
+
 
 
 La prescripción produce:
 
 - sesiones;
+
 - ejercicios;
+
 - series;
+
 - repeticiones;
+
 - duración;
+
 - intensidad;
+
 - carga;
+
 - descanso;
+
 - frecuencia;
+
 - progresión;
+
 - advertencias;
+
 - reevaluaciones.
 
 
+
 ======================================================================
+
 2. REQUERIMIENTOS FUNCIONALES
+
 ======================================================================
+
 
 
 ----------------------------
+
 RF-001 – GESTIÓN DE USUARIO
+
 ----------------------------
 
 El sistema debe permitir crear un perfil de escalador.
@@ -130,26 +195,41 @@ El sistema debe permitir crear un perfil de escalador.
 Campos mínimos:
 
 - UserID
+
 - nombre o alias
+
 - edad
+
 - sexo cuando tenga relevancia para un cálculo
+
 - peso corporal
+
 - estatura
+
 - envergadura
+
 - años escalando
+
 - fecha de creación
+
 - estado del usuario
 
 
+
 ----------------------------
+
 RF-002 – NIVEL DE ESCALADA
+
 ----------------------------
 
 Debe poder registrarse:
 
 - principiante
+
 - intermedio
+
 - avanzado
+
 - élite
 
 y además grados reales.
@@ -157,51 +237,75 @@ y además grados reales.
 Boulder:
 
 - grado habitual
+
 - máximo trabajado
+
 - máximo encadenado
 
 Deportiva:
 
 - grado habitual
+
 - máximo trabajado
+
 - máximo encadenado
 
 Las escalas de graduación deben almacenarse en tablas configurables.
 
-No codificar una única escala dentro del VBA.
+No codificar una única escala dentro del código Python.
+
 
 
 ----------------------------
+
 RF-003 – MODALIDAD
+
 ----------------------------
 
 Permitir:
 
 - Boulder
+
 - Deportiva
+
 - Mixto
 
 Debe existir modalidad principal.
 
 
+
 ----------------------------
+
 RF-004 – OBJETIVOS
+
 ----------------------------
 
 Permitir uno o varios objetivos:
 
 - fuerza máxima
+
 - fuerza de dedos
+
 - potencia
+
 - potencia de contacto
+
 - resistencia
+
 - resistencia de fuerza
+
 - power endurance
+
 - técnica
+
 - mejorar grado de Boulder
+
 - mejorar grado de deportiva
+
 - proyecto específico
+
 - acondicionamiento general
+
 - retorno progresivo
 
 Debe existir un objetivo principal.
@@ -209,71 +313,113 @@ Debe existir un objetivo principal.
 Permitir ponderación o prioridad entre objetivos.
 
 
+
 ----------------------------
+
 RF-005 – DISPONIBILIDAD
+
 ----------------------------
 
 Registrar:
 
 - número de días disponibles
+
 - días concretos
+
 - duración máxima de sesión
+
 - disponibilidad de muro
+
 - disponibilidad de gimnasio
+
 - entrenamiento en casa
+
 - descanso mínimo
+
 - restricciones horarias
 
 El planificador debe respetar estas restricciones.
 
 
+
 ----------------------------
+
 RF-006 – EQUIPO
+
 ----------------------------
 
 Registrar disponibilidad de:
 
 - muro
+
 - spray wall
+
 - MoonBoard
+
 - Kilter Board
+
 - Tension Board
+
 - campus board
+
 - hangboard
+
 - barra
+
 - anillas
+
 - TRX
+
 - poleas
+
 - discos
+
 - mancuernas
+
 - barra olímpica
+
 - bandas
+
 - gimnasio
+
 - otro equipo configurable
 
 Un ejercicio que requiera equipo no disponible debe ser excluido automáticamente.
 
 
+
 ----------------------------
+
 RF-007 – MOLESTIAS Y LIMITACIONES
+
 ----------------------------
 
 Registrar por región:
 
 - dedos
+
 - muñeca
+
 - codo
+
 - hombro
+
 - espalda
+
 - rodilla
+
 - tobillo
+
 - otra
 
 Estados:
 
 - ninguna
+
 - leve
+
 - limitación
+
 - lesión/rehabilitación
 
 El sistema NO debe diagnosticar.
@@ -281,29 +427,43 @@ El sistema NO debe diagnosticar.
 Debe poder:
 
 - excluir estímulos;
+
 - excluir ejercicios;
+
 - reducir carga;
+
 - bloquear progresión;
+
 - mostrar advertencias;
+
 - sugerir valoración profesional.
 
 
+
 ----------------------------
+
 RF-008 – PRIORIDAD DE SEGURIDAD
+
 ----------------------------
 
 Las reglas de seguridad deben tener prioridad sobre:
 
 - objetivo;
+
 - rendimiento;
+
 - preferencias;
+
 - progresión.
 
 Una regla de rendimiento jamás debe poder reactivar algo bloqueado por seguridad.
 
 
+
 ----------------------------
+
 RF-009 – TESTS
+
 ----------------------------
 
 Debe existir una base de tests.
@@ -313,33 +473,53 @@ Los tests no estarán fijos dentro del código.
 Cada test debe poder declarar:
 
 - TestID
+
 - nombre
+
 - objetivo
+
 - nivel requerido
+
 - equipo
+
 - unidad
+
 - protocolo
+
 - criterios de elegibilidad
+
 - riesgos/restricciones
+
 - fuente bibliográfica
 
 
+
 ----------------------------
+
 RF-010 – SELECCIÓN AUTOMÁTICA DE TESTS
+
 ----------------------------
 
 El sistema debe poder determinar qué evaluaciones corresponden según:
 
 - objetivo;
+
 - nivel;
+
 - experiencia;
+
 - equipo;
+
 - limitaciones;
+
 - historial.
 
 
+
 ----------------------------
+
 RF-011 – HISTORIAL DE TESTS
+
 ----------------------------
 
 Nunca sobrescribir resultados anteriores.
@@ -347,17 +527,27 @@ Nunca sobrescribir resultados anteriores.
 Guardar:
 
 - UserID
+
 - TestID
+
 - fecha
+
 - resultado
+
 - unidad
+
 - protocolo utilizado
+
 - Ruleset
+
 - observaciones
 
 
+
 ----------------------------
+
 RF-012 – BASE DE EJERCICIOS
+
 ----------------------------
 
 Crear una tabla estructurada de ejercicios.
@@ -365,80 +555,134 @@ Crear una tabla estructurada de ejercicios.
 Campos mínimos:
 
 ExerciseID
+
 Nombre
+
 Categoría
+
 Subcategoría
+
 Objetivo
+
 NivelMin
+
 NivelMax
+
 Modalidad
+
 Equipo
+
 ZonaCorporal
+
 StimulusType
+
 PrescriptionUnit
+
 MinSets
+
 MaxSets
+
 MinReps
+
 MaxReps
+
 Duration
+
 IntensityType
+
 RPE
+
 RIR
+
 Rest
+
 Frequency
+
 ProgressionRule
+
 RegressionRule
+
 Contraindications
+
 EvidenceID
+
 Tags
+
 Notes
 
 
+
 ----------------------------
+
 RF-013 – CATEGORÍAS
+
 ----------------------------
 
 Como mínimo:
 
 - escalada específica
+
 - técnica
+
 - fuerza de dedos
+
 - tracción
+
 - antagonistas
+
 - core
+
 - potencia
+
 - power endurance
+
 - resistencia
+
 - movilidad
+
 - prehabilitación
+
 - recuperación
 
 
+
 ----------------------------
+
 RF-014 – MOTOR DE REGLAS
+
 ----------------------------
 
 Crear un Rule Engine genérico.
 
-NO implementar cada decisión deportiva mediante un nuevo If en VBA.
+NO implementar cada decisión deportiva mediante un nuevo if en Python.
 
 El motor debe:
 
 1. cargar contexto;
+
 2. cargar Ruleset;
+
 3. evaluar condiciones;
+
 4. ejecutar acciones;
+
 5. resolver conflictos;
+
 6. producir un resultado determinista.
 
 
+
 ----------------------------
+
 RF-015 – REGLAS DECLARATIVAS
+
 ----------------------------
 
 Las reglas deben almacenarse como datos.
 
-No guardar código VBA ejecutable dentro de celdas.
+No guardar código Python ejecutable dentro de reglas, parámetros ni registros de la base de datos.
+
+No utilizar eval(), exec() ni expresiones arbitrarias introducidas por el usuario.
 
 Una regla debe describir:
 
@@ -449,27 +693,43 @@ y
 QUÉ ACCIÓN EJECUTAR.
 
 
+
 ----------------------------
+
 RF-016 – CONDICIONES
+
 ----------------------------
 
 Soportar como mínimo:
 
 EQ
+
 NEQ
+
 GT
+
 GTE
+
 LT
+
 LTE
+
 BETWEEN
+
 IN
+
 NOT_IN
+
 EXISTS
+
 NOT_EXISTS
 
 
+
 ----------------------------
+
 RF-017 – CONDICIONES COMPUESTAS
+
 ----------------------------
 
 Soportar:
@@ -495,25 +755,35 @@ AND
 FingerPain = 0
 
 
+
 ----------------------------
+
 RF-018 – ACCIONES
+
 ----------------------------
 
 Soportar inicialmente acciones genéricas como:
 
 INCLUDE_EXERCISE
+
 EXCLUDE_EXERCISE
 
 INCLUDE_CATEGORY
+
 EXCLUDE_CATEGORY
 
 SET_SETS
+
 SET_REPS
+
 SET_DURATION
+
 SET_INTENSITY
+
 SET_REST
 
 SET_MIN
+
 SET_MAX
 
 MULTIPLY_VOLUME
@@ -525,19 +795,25 @@ SET_LOAD
 SET_LOAD_PERCENT
 
 SET_RPE
+
 SET_RIR
 
 ALLOW_PROGRESSION
+
 BLOCK_PROGRESSION
 
 TRIGGER_DELOAD
+
 TRIGGER_REEVALUATION
 
 SHOW_WARNING
 
 
+
 ----------------------------
+
 RF-019 – CATÁLOGO DE ACCIONES
+
 ----------------------------
 
 Las acciones reconocidas por el motor deben tener catálogo propio.
@@ -545,32 +821,53 @@ Las acciones reconocidas por el motor deben tener catálogo propio.
 No depender de cadenas arbitrarias repartidas por el código.
 
 
+
 ----------------------------
+
 RF-020 – TIPOS DE REGLA
+
 ----------------------------
 
 Soportar:
 
 SAFETY
+
 ELIGIBILITY
+
 EXCLUSION
+
 TEST_SELECTION
+
 EXERCISE_SELECTION
+
 PRESCRIPTION
+
 VOLUME
+
 INTENSITY
+
 REST
+
 FREQUENCY
+
 SCHEDULING
+
 PROGRESSION
+
 REGRESSION
+
 DELOAD
+
 REEVALUATION
+
 WARNING
 
 
+
 ----------------------------
+
 RF-021 – PRIORIDAD
+
 ----------------------------
 
 Cada regla debe tener Priority.
@@ -580,8 +877,11 @@ La resolución debe ser determinista.
 No depender del número de fila.
 
 
+
 ----------------------------
+
 RF-022 – RESOLUCIÓN DE CONFLICTOS
+
 ----------------------------
 
 Definir formalmente precedencia.
@@ -589,20 +889,31 @@ Definir formalmente precedencia.
 Como mínimo:
 
 SAFETY
+
 >
+
 EXCLUSION
+
 >
+
 ELIGIBILITY
+
 >
+
 PRESCRIPTION
+
 >
+
 PREFERENCE
 
 Registrar conflictos detectados.
 
 
+
 ----------------------------
+
 RF-023 – PARÁMETROS
+
 ----------------------------
 
 Los números reutilizables deben almacenarse aparte.
@@ -610,29 +921,47 @@ Los números reutilizables deben almacenarse aparte.
 Ejemplo:
 
 ParameterID
+
 Category
+
 Name
+
 Value
+
 Unit
+
 RulesetVersion
 
 Los parámetros pueden representar:
 
 - segundos
+
 - porcentajes
+
 - ratios
+
 - repeticiones
+
 - series
+
 - límites
+
 - RPE
+
 - RIR
+
 - frecuencias
+
 - multiplicadores
+
 - tolerancias
 
 
+
 ----------------------------
+
 RF-024 – REFERENCIAS A PARÁMETROS
+
 ----------------------------
 
 Una regla puede referenciar:
@@ -642,8 +971,11 @@ ParameterID
 en lugar de duplicar el mismo valor muchas veces.
 
 
+
 ----------------------------
+
 RF-025 – RULESETS
+
 ----------------------------
 
 El conocimiento debe estar versionado.
@@ -651,13 +983,19 @@ El conocimiento debe estar versionado.
 Ejemplos:
 
 1.0.0
+
 1.1.0
+
 1.2.0
+
 2.0.0
 
 
+
 ----------------------------
+
 RF-026 – INMUTABILIDAD
+
 ----------------------------
 
 Una versión utilizada en producción no debe modificarse destructivamente.
@@ -667,8 +1005,11 @@ Si cambia una regla:
 crear nueva versión.
 
 
+
 ----------------------------
+
 RF-027 – VERSIONADO SEMÁNTICO
+
 ----------------------------
 
 Usar:
@@ -678,29 +1019,43 @@ MAJOR.MINOR.PATCH
 y documentar el criterio.
 
 
+
 ----------------------------
+
 RF-028 – ESTADOS DEL RULESET
+
 ----------------------------
 
 Soportar:
 
 DRAFT
+
 RESEARCH
+
 TESTING
+
 ACTIVE
+
 DEPRECATED
+
 ARCHIVED
 
 
+
 ----------------------------
+
 RF-029 – RULESET ACTIVO
+
 ----------------------------
 
 Solo un Ruleset válido y ACTIVE debe utilizarse por defecto para nuevos ciclos.
 
 
+
 ----------------------------
+
 RF-030 – CONSERVACIÓN DE VERSIÓN
+
 ----------------------------
 
 Cada plan generado debe guardar:
@@ -708,46 +1063,69 @@ Cada plan generado debe guardar:
 RulePackageVersionUsed
 
 
+
 ----------------------------
+
 RF-031 – GENERACIÓN DEL PLAN
+
 ----------------------------
 
-Crear:
+Crear el caso de uso:
 
-GenerarPlan()
+generar_plan()
 
 Debe producir una estructura global del ciclo.
 
 
+
 ----------------------------
+
 RF-032 – GENERACIÓN SEMANAL
+
 ----------------------------
 
-Crear:
+Crear el caso de uso:
 
-GenerarSemana()
+generar_semana()
 
 Debe generar como mínimo:
 
 Fecha
+
 Día
+
 Sesión
+
 Objetivo
+
 Ejercicio
+
 Series
+
 Reps
+
 Duración
+
 Intensidad
+
 Carga
+
 Descanso
+
 RPEObjetivo
+
 Notas
+
 Ruleset
+
 RuleIDs
 
 
+
 ----------------------------
+
 RF-033 – RESTRICCIÓN TEMPORAL
+
 ----------------------------
 
 Ninguna sesión generada debe exceder sustancialmente el tiempo disponible.
@@ -757,8 +1135,11 @@ Si no cabe:
 el motor debe priorizar o reducir según reglas.
 
 
+
 ----------------------------
+
 RF-034 – DISTRIBUCIÓN DE CARGAS
+
 ----------------------------
 
 El planificador debe evaluar incompatibilidades entre días.
@@ -766,101 +1147,153 @@ El planificador debe evaluar incompatibilidades entre días.
 Las reglas establecerán:
 
 - recuperación mínima;
+
 - estímulos incompatibles;
+
 - frecuencia máxima;
+
 - frecuencia mínima.
 
 
+
 ----------------------------
+
 RF-035 – REGISTRO DE SESIÓN
+
 ----------------------------
 
 El usuario debe registrar:
 
 - completada
+
 - parcial
+
 - omitida
+
 - porcentaje completado
+
 - RPE
+
 - fatiga
+
 - calidad
+
 - dolor
+
 - series
+
 - repeticiones
+
 - cargas
+
 - tiempos
+
 - comentarios
 
 
+
 ----------------------------
+
 RF-036 – ADAPTACIÓN
+
 ----------------------------
 
 La siguiente prescripción debe poder utilizar el feedback anterior.
 
 
+
 ----------------------------
+
 RF-037 – PROGRESIÓN
+
 ----------------------------
 
 Soportar decisiones:
 
 PROGRESS
+
 MAINTAIN
+
 REGRESS
+
 DELOAD
+
 STOP
+
 REEVALUATE
 
 Los criterios concretos deben vivir en reglas.
 
 
+
 ----------------------------
+
 RF-038 – NUEVO CICLO
+
 ----------------------------
 
-Crear:
+Crear el caso de uso:
 
-CrearNuevoCiclo()
+crear_nuevo_ciclo()
 
 Debe iniciar un nuevo ciclo sin destruir el anterior.
 
 
+
 ----------------------------
+
 RF-039 – REEVALUACIÓN
+
 ----------------------------
 
-Crear:
+Crear el caso de uso:
 
-EjecutarReevaluacion()
+ejecutar_reevaluacion()
 
 Las reglas determinarán:
 
 - cuándo;
+
 - qué pruebas;
+
 - qué variables actualizar.
 
 
+
 ----------------------------
+
 RF-040 – TRAZABILIDAD
+
 ----------------------------
 
 Toda decisión de prescripción relevante debe poder registrar:
 
 DecisionID
+
 UserID
+
 PlanID
+
 RulePackageVersion
+
 RuleID
+
 InputValues
+
 Action
+
 PreviousValue
+
 NewValue
+
 Timestamp
 
 
+
 ----------------------------
+
 RF-041 – EXPLICABILIDAD
+
 ----------------------------
 
 El usuario técnico debe poder preguntar:
@@ -876,119 +1309,221 @@ El usuario técnico debe poder preguntar:
 ¿Por qué apareció esta advertencia?
 
 
+
 ----------------------------
+
 RF-042 – DEBUG
+
 ----------------------------
 
 Crear modo Debug capaz de mostrar:
 
 - reglas evaluadas;
+
 - reglas cumplidas;
+
 - reglas fallidas;
+
 - acciones generadas;
+
 - conflictos;
+
 - reglas ganadoras;
+
 - parámetros utilizados;
+
 - resultado final.
 
 
+
 ----------------------------
+
 RF-043 – IMPORTACIÓN DE RULESETS
-----------------------------
-
-Permitir importar una nueva versión de reglas sin modificar el VBA.
-
 
 ----------------------------
+
+Permitir importar una nueva versión de reglas sin modificar ni recompilar el código Python.
+
+El formato de intercambio debe ser un paquete ZIP con un manifest.json y archivos
+
+JSON validados mediante JSON Schema. El manifiesto debe incluir como mínimo:
+
+PackageID, Version, Status, SchemaVersion, CreatedAt, Checksums y Compatibility.
+
+La importación debe ser atómica: validar esquema, referencias, compatibilidad y
+
+checksums antes de escribir cualquier cambio en la base de datos.
+
+
+
+----------------------------
+
 RF-044 – EXPORTACIÓN DE RULESETS
+
 ----------------------------
 
 Permitir exportar Rulesets.
 
+La exportación debe producir el mismo formato canónico de paquete, con orden estable
+
+y checksums reproducibles, sin incluir datos personales ni historial de usuarios.
+
+
 
 ----------------------------
+
 RF-045 – VALIDACIÓN DEL RULESET
+
 ----------------------------
 
-Crear:
+Crear el caso de uso:
 
-ValidateRulePackage()
+validate_rule_package()
 
 Debe comprobar al menos:
 
 - RuleID duplicados
+
 - operador inexistente
+
 - ActionType inexistente
+
 - ParameterID inexistente
+
 - ExerciseID inexistente
+
 - SourceID inexistente
+
 - tipos incompatibles
+
 - rangos inválidos
+
 - prioridades inválidas
+
 - referencias rotas
+
 - versiones inválidas
 
 
+
 ----------------------------
+
 RF-046 – ACTIVACIÓN
+
 ----------------------------
 
 Un Ruleset que no pase la validación no puede pasar a ACTIVE.
 
 
+
 ----------------------------
+
 RF-047 – DASHBOARD
+
 ----------------------------
 
 Mostrar como mínimo:
 
 - semana actual
+
 - cumplimiento
+
 - sesiones
+
 - carga
+
 - progresión
+
 - tests
+
 - grados
+
 - indicadores relevantes
+
 - fatiga reciente
+
 - Ruleset activo
 
 
+
 ----------------------------
+
 RF-048 – EXPORTACIÓN
-----------------------------
-
-Crear:
-
-ExportarPlanPDF()
-
 
 ----------------------------
+
+Crear el caso de uso:
+
+exportar_plan_pdf()
+
+
+
+----------------------------
+
 RF-049 – PROTECCIÓN DE HISTORIAL
+
 ----------------------------
 
 Generar planes nuevos jamás debe borrar resultados anteriores.
 
 
+
 ----------------------------
+
 RF-050 – INTERFAZ
+
 ----------------------------
 
 Pantalla principal con:
 
 NUEVO USUARIO
+
 MI PERFIL
+
 EVALUACIONES
+
 GENERAR PLAN
+
 ENTRENAMIENTO DE HOY
+
 REGISTRAR ENTRENAMIENTO
+
 PROGRESO
+
 HISTORIAL
+
 CONFIGURACIÓN
 
 
+
+----------------------------
+
+RF-051 – PERSISTENCIA, RESPALDO Y ACTUALIZACIÓN
+
+----------------------------
+
+La aplicación debe:
+
+- conservar los datos al cerrarse y abrirse de nuevo;
+
+- crear una copia de seguridad antes de migraciones de esquema;
+
+- permitir exportar y restaurar una copia de seguridad completa;
+
+- validar que una copia sea compatible antes de restaurarla;
+
+- realizar restauraciones de forma atómica;
+
+- conservar reglas, planes e historial al actualizar el ejecutable;
+
+- permitir exportar los datos del usuario en un formato legible y documentado.
+
+
+
 ======================================================================
+
 3. INVESTIGACIÓN CIENTÍFICA OBLIGATORIA
+
 ======================================================================
 
 Esta sección es OBLIGATORIA.
@@ -998,61 +1533,97 @@ No construyas las reglas deportivas finales únicamente con conocimiento interno
 Debes INVESTIGAR la evidencia disponible.
 
 
+
 ----------------------------
+
 INV-001 – INVESTIGAR ANTES DE PRESCRIBIR
+
 ----------------------------
 
 Antes de convertir un valor, protocolo, umbral o criterio deportivo en una
+
 regla de producción:
 
 buscar fuentes relevantes.
 
 
+
 ----------------------------
+
 INV-002 – JERARQUÍA DE FUENTES
+
 ----------------------------
 
 Priorizar, aproximadamente:
 
 1. revisiones sistemáticas;
+
 2. metaanálisis;
+
 3. consensos o position statements de organizaciones reconocidas;
+
 4. ensayos controlados;
+
 5. estudios longitudinales;
+
 6. estudios observacionales;
+
 7. investigación específica de escalada;
+
 8. libros académicos;
+
 9. consenso profesional;
+
 10. heurística de entrenador.
 
 No tratar todas las fuentes como equivalentes.
 
 
+
 ----------------------------
+
 INV-003 – INVESTIGACIÓN ESPECÍFICA DE ESCALADA
+
 ----------------------------
 
 Buscar especialmente literatura relacionada con:
 
 - climbing;
+
 - sport climbing;
+
 - bouldering;
+
 - finger strength;
+
 - fingerboard;
+
 - hangboard;
+
 - grip strength;
+
 - forearm endurance;
+
 - climbing performance;
+
 - power endurance;
+
 - campus board;
+
 - climbing injuries;
+
 - load management;
+
 - strength training for climbers;
+
 - physiological demands of climbing.
 
 
+
 ----------------------------
+
 INV-004 – EVIDENCIA GENERAL
+
 ----------------------------
 
 Cuando no exista evidencia específica suficiente en escalada:
@@ -1060,12 +1631,19 @@ Cuando no exista evidencia específica suficiente en escalada:
 puede utilizarse evidencia general de:
 
 - entrenamiento de fuerza;
+
 - potencia;
+
 - resistencia;
+
 - periodización;
+
 - recuperación;
+
 - RPE;
+
 - RIR;
+
 - gestión de carga;
 
 pero debe etiquetarse como:
@@ -1073,21 +1651,31 @@ pero debe etiquetarse como:
 EVIDENCIA INDIRECTA.
 
 
+
 ----------------------------
+
 INV-005 – NO INVENTAR FUENTES
+
 ----------------------------
 
 PROHIBIDO:
 
 - inventar DOI;
+
 - inventar PMID;
+
 - inventar autores;
+
 - inventar títulos;
+
 - afirmar que un estudio dice algo que no dice.
 
 
+
 ----------------------------
+
 INV-006 – VERIFICACIÓN
+
 ----------------------------
 
 Antes de guardar una referencia:
@@ -1097,14 +1685,21 @@ verificar que realmente existe.
 Cuando sea posible registrar:
 
 - DOI;
+
 - PMID;
+
 - URL editorial;
+
 - URL PubMed;
+
 - identificador equivalente.
 
 
+
 ----------------------------
+
 INV-007 – FECHA DE CONSULTA
+
 ----------------------------
 
 Registrar:
@@ -1114,69 +1709,107 @@ AccessedDate
 para fuentes web.
 
 
+
 ----------------------------
+
 INV-008 – BASE DE EVIDENCIA
+
 ----------------------------
 
-Crear:
+Crear la tabla:
 
-tblEvidence
+evidence
 
 con al menos:
 
 SourceID
+
 SourceType
+
 Authors
+
 Title
+
 Year
+
 Journal
+
 Volume
+
 Issue
+
 Pages
+
 DOI
+
 PMID
+
 URL
+
 AccessedDate
+
 EvidenceLevel
+
 ClimbingSpecific
+
 Population
+
 MainFinding
+
 Limitations
+
 Notes
 
 
+
 ----------------------------
+
 INV-009 – MAPEO REGLA → EVIDENCIA
+
 ----------------------------
 
 No limitar Rule a un único SourceID.
 
 Crear una tabla de relación:
 
-tblRuleEvidence
+rule_evidence
 
 con:
 
 RuleID
+
 RulesetVersion
+
 SourceID
+
 RelationType
+
 EvidenceStrength
+
 Notes
+
 
 
 RelationType puede incluir:
 
 DIRECT_SUPPORT
+
 INDIRECT_SUPPORT
+
 BACKGROUND
+
 CONTRADICTS
+
 SAFETY
+
 RATIONALE
 
 
+
 ----------------------------
+
 INV-010 – JUSTIFICACIÓN
+
 ----------------------------
 
 Cada regla de producción debe tener:
@@ -1186,27 +1819,41 @@ Rationale
 explicando:
 
 - por qué existe;
+
 - qué intenta conseguir;
+
 - de dónde viene;
+
 - qué grado de confianza tiene.
 
 
+
 ----------------------------
+
 INV-011 – CLASIFICACIÓN
+
 ----------------------------
 
 Cada regla deberá clasificarse como una de:
 
 DIRECT_EVIDENCE
+
 INDIRECT_EVIDENCE
+
 CONSENSUS
+
 EXPERT_HEURISTIC
+
 DESIGN_DECISION
+
 SAFETY_PRECAUTION
 
 
+
 ----------------------------
+
 INV-012 – PARÁMETROS TAMBIÉN SE REFERENCIAN
+
 ----------------------------
 
 No solo las reglas.
@@ -1216,28 +1863,43 @@ Los parámetros deportivos importantes también deben poder vincularse a evidenc
 Ejemplo:
 
 descanso
+
 frecuencia
+
 volumen
+
 intensidad
+
 duración
+
 progresión
+
 umbral
 
 
+
 ----------------------------
+
 INV-013 – EJERCICIOS
+
 ----------------------------
 
 Para ejercicios relevantes registrar:
 
 - objetivo;
+
 - fundamento;
+
 - contraindicación;
+
 - fuente cuando exista.
 
 
+
 ----------------------------
+
 INV-014 – TESTS
+
 ----------------------------
 
 Para cada prueba utilizada:
@@ -1245,15 +1907,23 @@ Para cada prueba utilizada:
 investigar:
 
 - qué mide;
+
 - validez;
+
 - confiabilidad cuando exista evidencia;
+
 - población;
+
 - protocolo;
+
 - limitaciones.
 
 
+
 ----------------------------
+
 INV-015 – SEGURIDAD
+
 ----------------------------
 
 Las reglas relacionadas con riesgo requieren especial cuidado.
@@ -1261,8 +1931,11 @@ Las reglas relacionadas con riesgo requieren especial cuidado.
 No inferir que ausencia de evidencia significa seguridad.
 
 
+
 ----------------------------
+
 INV-016 – INCERTIDUMBRE
+
 ----------------------------
 
 Cuando la literatura sea insuficiente o contradictoria:
@@ -1276,13 +1949,19 @@ EvidenceStatus = UNCERTAIN
 y utilizar:
 
 - rangos;
+
 - configuración;
+
 - heurística explícita;
+
 - criterio conservador cuando corresponda.
 
 
+
 ----------------------------
+
 INV-017 – CONTRADICCIONES
+
 ----------------------------
 
 Si dos fuentes relevantes discrepan:
@@ -1292,8 +1971,11 @@ documentarlo.
 No ocultar la contradicción.
 
 
+
 ----------------------------
+
 INV-018 – REVISIÓN DE LITERATURA
+
 ----------------------------
 
 Generar un documento:
@@ -1303,20 +1985,33 @@ Generar un documento:
 Organizado por temas:
 
 - demandas de la escalada;
+
 - fuerza de dedos;
+
 - fuerza general;
+
 - potencia;
+
 - resistencia;
+
 - power endurance;
+
 - periodización;
+
 - recuperación;
+
 - evaluación;
+
 - prevención de lesiones;
+
 - progresión.
 
 
+
 ----------------------------
+
 INV-019 – MATRIZ DE EVIDENCIA
+
 ----------------------------
 
 Generar:
@@ -1328,16 +2023,25 @@ o equivalente tabular.
 Debe relacionar:
 
 RuleID
+
 Descripción
+
 Valor/acción
+
 Fuente
+
 Tipo de evidencia
+
 Confianza
+
 Notas
 
 
+
 ----------------------------
+
 INV-020 – BIBLIOGRAFÍA
+
 ----------------------------
 
 Generar:
@@ -1347,8 +2051,11 @@ Generar:
 con todas las fuentes utilizadas.
 
 
+
 ----------------------------
+
 INV-021 – CITA EN DOCUMENTACIÓN
+
 ----------------------------
 
 Cuando README o documentación afirme una decisión científica:
@@ -1356,25 +2063,35 @@ Cuando README o documentación afirme una decisión científica:
 citar la fuente correspondiente.
 
 
+
 ----------------------------
+
 INV-022 – NO CONFUNDIR CORRELACIÓN CON PRESCRIPCIÓN
+
 ----------------------------
 
 Que una variable se correlacione con rendimiento NO significa automáticamente
+
 que exista evidencia para prescribir un protocolo concreto.
 
 Distinguir estas cosas explícitamente.
 
 
+
 ----------------------------
+
 INV-023 – NO EXTRAPOLAR SIN MARCARLO
+
 ----------------------------
 
 Si se extrapolan resultados de:
 
 - levantadores;
+
 - corredores;
+
 - población general;
+
 - atletas de otro deporte;
 
 a escaladores:
@@ -1382,8 +2099,11 @@ a escaladores:
 marcarlo como evidencia indirecta.
 
 
+
 ----------------------------
+
 INV-024 – REGLA DE PRODUCCIÓN
+
 ----------------------------
 
 Una regla puede entrar al Ruleset de producción solo si tiene:
@@ -1393,13 +2113,17 @@ A) evidencia identificable;
 o
 
 B) una justificación explícita de que se trata de consenso, heurística,
+
 precaución o decisión de diseño.
 
 Nunca dejar origen desconocido.
 
 
+
 ======================================================================
+
 4. RULESET DE INVESTIGACIÓN Y RULESET DE PRODUCCIÓN
+
 ======================================================================
 
 No empieces fingiendo que ya conocemos todas las reglas.
@@ -1413,6 +2137,7 @@ Estado:
 TESTING
 
 Su propósito es comprobar técnicamente el motor.
+
 
 
 Posteriormente crear:
@@ -1432,6 +2157,7 @@ y solo tras validación:
 ACTIVE.
 
 
+
 No mezclar:
 
 “funciona técnicamente”
@@ -1441,495 +2167,873 @@ con
 “está validado científicamente”.
 
 
+
 ======================================================================
+
 5. ESTRUCTURA DE DATOS DEL MOTOR
-======================================================================
-
-Diseñar como mínimo:
-
-tblRules
-tblRuleConditions
-tblRuleActions
-tblRuleParameters
-tblParameters
-tblRulePackages
-tblEvidence
-tblRuleEvidence
-tblExercises
-tblTests
-tblUsers
-tblUserEquipment
-tblUserLimitations
-tblObjectives
-tblPlans
-tblSessions
-tblSessionExercises
-tblSessionFeedback
-tblTestHistory
-tblDecisionLog
-
 
 ======================================================================
-6. ESTRUCTURA DEL EXCEL
-======================================================================
 
-Crear aproximadamente:
+Diseñar como mínimo las siguientes tablas relacionales:
 
-00_INICIO
-01_PERFIL
-02_OBJETIVOS
-03_DISPONIBILIDAD
-04_EQUIPO
-05_EVALUACION
-06_PLAN
-07_SESION_ACTUAL
-08_REGISTRO
-09_PROGRESO
-10_EJERCICIOS
-11_TESTS
-12_REGLAS
-13_CONDICIONES
-14_ACCIONES
-15_PARAMETROS
-16_RULESETS
-17_EVIDENCIA
-18_RULE_EVIDENCE
-19_ESCALAS
-20_HISTORIAL_TESTS
-21_LOG_DECISIONES
-22_CONFIGURACION
-23_DEBUG
+rules
 
-Las hojas técnicas pueden ocultarse.
+rule_conditions
 
+rule_actions
 
-======================================================================
-7. ARQUITECTURA VBA
-======================================================================
+rule_parameters
 
-Separar aproximadamente:
+parameters
 
-modMain
-modValidation
+rule_packages
 
-modRuleEngine
-modRuleConditions
-modRuleActions
-modRuleResolver
-modRuleValidation
+evidence
 
-modTrainingEngine
-modPrescription
-modScheduling
-modProgression
-modExercises
-modTests
+rule_evidence
 
-modCalculations
-modPersistence
+exercises
 
-modUI
-modReports
+tests
 
-modDebug
-modUtils
+users
+
+user_equipment
+
+user_limitations
+
+objectives
+
+plans
+
+sessions
+
+session_exercises
+
+session_feedback
+
+test_history
+
+decision_log
 
 
-TODOS:
 
-Option Explicit
+Utilizar SQLite como base de datos local predeterminada, SQLAlchemy 2.x como ORM
+
+y Alembic para migraciones. Definir claves primarias, claves foráneas, índices,
+
+restricciones de unicidad y transacciones explícitas.
 
 
-No crear una macro monstruosa.
+
+No guardar como única referencia mutable los datos que permiten reproducir un plan.
+
+Cada plan debe conservar un snapshot canónico de sus entradas, parámetros, reglas
+
+y versión del paquete utilizado, además de las relaciones normalizadas necesarias.
+
 
 
 ======================================================================
-8. MACROS PRINCIPALES
-======================================================================
 
-Crear como mínimo:
-
-GuardarPerfil()
-ValidarPerfil()
-
-GenerarPlan()
-GenerarSemana()
-
-CargarRulePackage()
-
-EvaluarReglas()
-EvaluarRegla()
-EvaluarCondicion()
-EjecutarAccion()
-ResolverConflictos()
-
-ValidateRulePackage()
-
-RegistrarSesion()
-ActualizarProgresion()
-
-EjecutarReevaluacion()
-CrearNuevoCiclo()
-
-ImportarRuleset()
-ExportarRuleset()
-
-MostrarTrazabilidad()
-
-ExportarPlanPDF()
-
+6. ESTRUCTURA DE LA APLICACIÓN
 
 ======================================================================
+
+Crear una aplicación de escritorio con PySide6 y navegación aproximadamente así:
+
+INICIO / DASHBOARD
+
+PERFIL
+
+OBJETIVOS
+
+DISPONIBILIDAD
+
+EQUIPO
+
+EVALUACIONES
+
+PLAN
+
+SESIÓN ACTUAL
+
+REGISTRO DE ENTRENAMIENTO
+
+PROGRESO
+
+HISTORIAL
+
+CONFIGURACIÓN
+
+
+
+Incluir un área técnica, separada de la experiencia normal del usuario, para:
+
+EJERCICIOS
+
+TESTS
+
+REGLAS
+
+CONDICIONES
+
+ACCIONES
+
+PARÁMETROS
+
+RULESETS
+
+EVIDENCIA
+
+MATRIZ RULE → EVIDENCE
+
+ESCALAS
+
+HISTORIAL DE TESTS
+
+LOG DE DECISIONES
+
+CONFIGURACIÓN TÉCNICA
+
+DEBUG
+
+
+
+Las funciones técnicas pueden ocultarse tras un modo avanzado, pero no deben
+
+quedar inaccesibles para auditoría y mantenimiento.
+
+
+
+La interfaz debe:
+
+- validar los formularios antes de guardar;
+
+- mostrar errores junto al campo correspondiente;
+
+- conservar el estado al cambiar de pantalla;
+
+- pedir confirmación antes de operaciones irreversibles;
+
+- ofrecer estados vacíos y mensajes de error comprensibles;
+
+- ejecutar tareas costosas sin congelar la ventana;
+
+- ser utilizable con teclado y en pantallas de 1366 × 768 o superiores.
+
+
+
+======================================================================
+
+7. ARQUITECTURA PYTHON
+
+======================================================================
+
+Usar Python 3.12 o superior y una arquitectura por capas, aproximadamente:
+
+src/climber_training/domain
+
+- entidades y value objects;
+
+- reglas de negocio estables;
+
+- tipos y contratos del motor.
+
+src/climber_training/application
+
+- casos de uso;
+
+- DTOs;
+
+- puertos de persistencia, reportes e importación/exportación.
+
+src/climber_training/infrastructure
+
+- modelos y repositorios SQLAlchemy;
+
+- SQLite;
+
+- migraciones Alembic;
+
+- importadores, exportadores y generación de PDF;
+
+- logging y configuración.
+
+src/climber_training/rule_engine
+
+- carga y validación de paquetes;
+
+- evaluación de condiciones;
+
+- ejecución de acciones;
+
+- resolución de conflictos;
+
+- trazabilidad.
+
+src/climber_training/ui
+
+- ventanas, páginas, diálogos y view models/controladores PySide6;
+
+- recursos visuales;
+
+- adaptación de eventos de interfaz a casos de uso.
+
+
+
+La UI no debe consultar directamente la base de datos ni contener decisiones
+
+deportivas. El dominio no debe importar PySide6, SQLAlchemy ni detalles de PDF.
+
+Utilizar type hints, dataclasses o modelos Pydantic cuando corresponda, enums para
+
+catálogos estables e inyección explícita de dependencias.
+
+
+
+No crear un archivo Python monolítico ni concentrar toda la aplicación en una
+
+sola clase.
+
+
+
+======================================================================
+
+8. CASOS DE USO Y SERVICIOS PRINCIPALES
+
+======================================================================
+
+Crear como mínimo funciones o servicios equivalentes a:
+
+guardar_perfil()
+
+validar_perfil()
+
+generar_plan()
+
+generar_semana()
+
+cargar_rule_package()
+
+evaluar_reglas()
+
+evaluar_regla()
+
+evaluar_condicion()
+
+ejecutar_accion()
+
+resolver_conflictos()
+
+validate_rule_package()
+
+registrar_sesion()
+
+actualizar_progresion()
+
+ejecutar_reevaluacion()
+
+crear_nuevo_ciclo()
+
+importar_ruleset()
+
+exportar_ruleset()
+
+mostrar_trazabilidad()
+
+exportar_plan_pdf()
+
+
+
+Los nombres públicos deben ser consistentes y estar documentados. Los casos de uso
+
+que modifiquen datos relacionados deben ejecutarse dentro de una transacción.
+
+
+
+======================================================================
+
 9. REQUERIMIENTOS NO FUNCIONALES
+
 ======================================================================
 
 RNF-001
+
 Código modular.
 
 RNF-002
-No utilizar Select/Activate salvo necesidad justificada.
+
+Compatibilidad mínima con Windows 10 y 11; conservar una arquitectura portable a
+
+Linux y macOS cuando no contradiga el empaquetado principal.
 
 RNF-003
-No usar referencias mágicas a celdas.
+
+No usar rutas, identificadores, claves ni valores deportivos mágicos en el código.
 
 RNF-004
-Preferir ListObjects y nombres estructurados.
+
+Usar configuración tipada, migraciones reproducibles y consultas parametrizadas.
 
 RNF-005
+
 Separar lógica y presentación.
 
 RNF-006
+
 Validación de entradas.
 
 RNF-007
-Manejo de errores.
+
+Manejo centralizado de errores, logging rotativo y mensajes comprensibles para el usuario.
 
 RNF-008
+
 Resultados deterministas.
 
 RNF-009
+
 Auditable.
 
 RNF-010
+
 Versionable.
 
 RNF-011
+
 Extensible.
 
 RNF-012
-Documentado.
+
+Documentado, con docstrings útiles y guía de instalación, uso, respaldo y recuperación.
 
 RNF-013
+
 No destruir historial.
 
 RNF-014
-No depender de modificación manual del VBA para cambiar una prescripción normal.
+
+No depender de modificar ni recompilar Python para cambiar una prescripción normal.
 
 RNF-015
+
 Interfaz utilizable por una persona sin conocimiento técnico.
 
+RNF-016
+
+La versión distribuida debe abrirse mediante un ejecutable o acceso directo, sin
+
+requerir una instalación previa de Python.
+
+RNF-017
+
+Empaquetado reproducible con PyInstaller y generación automatizada del instalador
+
+para Windows.
+
+RNF-018
+
+Los datos deben persistir fuera del directorio de instalación, en una carpeta de
+
+datos de usuario apropiada para el sistema operativo.
+
+RNF-019
+
+Crear copias de seguridad exportables y documentar restauración. Una actualización
+
+de la aplicación no debe borrar la base de datos del usuario.
+
+RNF-020
+
+No realizar llamadas de red ocultas. Toda función que consulte internet debe ser
+
+explícita, tolerante a desconexión y respetar la privacidad del usuario.
+
+
 
 ======================================================================
+
 10. TESTING
+
 ======================================================================
 
-Crear pruebas del motor.
+Crear pruebas automatizadas con pytest para dominio, casos de uso, repositorios,
+
+migraciones, importación/exportación y motor de reglas. Usar pytest-qt para los
+
+flujos críticos de interfaz y pruebas end-to-end mínimas sobre una base temporal.
 
 CASO A
+
 Principiante
+
 2 días
+
 equipo limitado.
 
 CASO B
+
 Intermedio
+
 3-4 días
+
 objetivo fuerza.
 
 CASO C
+
 Avanzado
+
 4-5 días
+
 Boulder/potencia.
 
 CASO D
+
 Usuario con dolor o limitación.
 
 CASO E
+
 Usuario con 45 minutos.
 
 CASO F
+
 Mismo usuario:
+
 Ruleset 1.0
+
 contra
+
 Ruleset 1.1.
 
 CASO G
+
 Regla de rendimiento permite ejercicio.
+
 Regla Safety lo bloquea.
+
 Debe ganar Safety.
 
 CASO H
+
 ParameterID inexistente.
+
 Ruleset debe fallar validación.
 
 CASO I
+
 SourceID inexistente.
+
 Detectar referencia rota.
 
 CASO J
+
 Regla sin evidencia ni justificación.
+
 Debe quedar marcada para revisión.
+
 
 
 Probar además:
 
 EQ
+
 NEQ
+
 GT
+
 GTE
+
 LT
+
 LTE
+
 BETWEEN
+
 IN
+
 NOT_IN
+
 AND
+
 OR
+
 prioridades
+
 conflictos
+
 acciones
+
 parámetros
+
 versionado
+
 trazabilidad
 
 
+
 ======================================================================
+
 11. CRITERIOS DE ACEPTACIÓN
+
 ======================================================================
 
 El sistema NO está terminado hasta que:
 
 CA-001
+
 Puedo crear un usuario.
 
 CA-002
+
 Puedo registrar perfil.
 
 CA-003
+
 Puedo registrar disponibilidad.
 
 CA-004
+
 Puedo registrar equipo.
 
 CA-005
+
 Puedo registrar objetivos.
 
 CA-006
+
 Puedo registrar limitaciones.
 
 CA-007
+
 Puedo realizar evaluaciones.
 
 CA-008
+
 Puedo elegir un Ruleset válido.
 
 CA-009
+
 Puedo generar un plan.
 
 CA-010
+
 El motor calcula prescripción sin depender de rutinas fijas.
 
 CA-011
+
 Series, reps, intensidad y descansos proceden del sistema de reglas/parámetros.
 
 CA-012
+
 Puedo identificar exactamente qué RuleID influyó en una decisión.
 
 CA-013
+
 Puedo saber qué versión produjo el plan.
 
 CA-014
+
 Puedo consultar la fuente que justifica una regla.
 
 CA-015
+
 Las fuentes existen y han sido verificadas.
 
 CA-016
+
 Una regla sin evidencia está identificada explícitamente como heurística,
+
 consenso, decisión de diseño o precaución.
 
 CA-017
+
 Puedo registrar lo realizado.
 
 CA-018
+
 El sistema usa el feedback.
 
 CA-019
+
 Puede progresar, mantener, reducir o descargar según reglas.
 
 CA-020
+
 No pierde historial.
 
 CA-021
+
 Puedo crear Ruleset 1.1 sin alterar 1.0.
 
 CA-022
+
 Puedo importar/exportar Rulesets.
 
 CA-023
+
 Un Ruleset inválido no puede activarse.
 
 CA-024
+
 Safety prevalece sobre rendimiento.
 
 CA-025
+
 El sistema conserva trazabilidad.
 
 CA-026
-No existen errores VBA conocidos.
+
+No existen errores Python conocidos, fallos de migración ni excepciones no controladas
+
+en los recorridos principales.
 
 CA-027
+
 Existe README.
 
 CA-028
+
 Existe documentación de arquitectura.
 
 CA-029
+
 Existe revisión de evidencia.
 
 CA-030
+
 Existe matriz Rule → Evidence.
 
 CA-031
+
 Existe bibliografía.
 
 CA-032
+
 Existe registro de limitaciones e incertidumbres.
+
+CA-033
+
+Puedo instalar y abrir la aplicación en Windows sin tener Python instalado.
+
+CA-034
+
+Cerrar, actualizar o reinstalar la aplicación no elimina los datos del usuario.
+
+CA-035
+
+Puedo crear y restaurar una copia de seguridad verificada.
+
+CA-036
+
+La importación de un Ruleset inválido no deja cambios parciales en la base de datos.
+
 
 
 ======================================================================
+
 12. ENTREGABLES
+
 ======================================================================
 
 Crear:
 
-/training-climber-excel
+/training-climber-python
 
-    /src
-        /vba
-        /python
+    /src
 
-    /rules
-        /demo
-        /1.0.0-candidate
+        /climber_training
 
-    /evidence
+            /domain
 
-    /tests
+            /application
 
-    /docs
-        ARCHITECTURE.md
-        REQUIREMENTS.md
-        RULE_ENGINE.md
-        EVIDENCE_REVIEW.md
-        RULE_EVIDENCE_MATRIX.md
-        REFERENCES.md
-        TEST_REPORT.md
+            /infrastructure
 
-    /dist
+            /rule_engine
 
-    README.md
+            /ui
+
+            /resources
+
+    /alembic
+
+    /rules
+
+        /demo
+
+        /1.0.0-candidate
+
+    /evidence
+
+    /tests
+
+        /unit
+
+        /integration
+
+        /ui
+
+    /scripts
+
+    /packaging
+
+    /docs
+
+        ARCHITECTURE.md
+
+        REQUIREMENTS.md
+
+        DATA_MODEL.md
+
+        RULE_ENGINE.md
+
+        EVIDENCE_REVIEW.md
+
+        RULE_EVIDENCE_MATRIX.md
+
+        REFERENCES.md
+
+        TEST_REPORT.md
+
+        USER_GUIDE.md
+
+        BACKUP_AND_RESTORE.md
+
+    /dist
+
+    pyproject.toml
+
+    alembic.ini
+
+    README.md
 
 
-Resultado esperado:
 
-/dist/Entrenamiento_Escalada.xlsm
+Resultados esperados:
+
+- código fuente completo y ejecutable en modo desarrollo;
+
+- /dist/Entrenamiento_Escalada.exe o instalador equivalente para Windows;
+
+- base de datos inicial creada mediante migraciones y datos semilla;
+
+- Ruleset DEMO y Ruleset 1.0.0 Candidate importables/exportables;
+
+- documentación y reportes indicados;
+
+- instrucciones exactas para ejecutar, probar, empaquetar, actualizar y recuperar datos.
 
 
-Si el entorno no permite generar directamente el .xlsm:
 
-crear:
+El ejecutable no debe contener una base de datos de usuario mutable incrustada.
 
-- workbook;
-- módulos .bas;
-- clases .cls;
-- formularios;
-- script instalador/importador;
-- instrucciones exactas de compilación.
+En el primer inicio, la aplicación debe crear o migrar la base de datos en la carpeta
 
-No fingir que openpyxl puede crear VBA desde cero.
+de datos del usuario. Los recursos semilla incluidos en el paquete deben ser de solo
+
+lectura y cargarse de forma idempotente.
+
 
 
 ======================================================================
+
 13. FORMA DE TRABAJAR
+
 ======================================================================
 
 FASE 1
+
 Inspeccionar entorno.
 
 FASE 2
+
 Crear REQUIREMENTS.md a partir de estos requerimientos.
 
 FASE 3
+
 Diseñar arquitectura.
 
 FASE 4
+
 Diseñar modelo de datos.
 
 FASE 5
+
 Diseñar Rule Engine.
 
 FASE 6
+
 Diseñar versionado.
 
 FASE 7
-Construir infraestructura del workbook.
+
+Construir infraestructura de la aplicación, persistencia y migraciones.
 
 FASE 8
+
 Implementar motor.
 
 FASE 9
+
 Implementar trazabilidad.
 
 FASE 10
+
 Construir Ruleset DEMO.
 
 FASE 11
+
 Probar técnicamente el motor.
 
 FASE 12
+
 Realizar investigación científica.
 
 FASE 13
+
 Crear EVIDENCE_REVIEW.md.
 
 FASE 14
+
 Crear REFERENCES.md.
 
 FASE 15
+
 Crear matriz Rule → Evidence.
 
 FASE 16
+
 Proponer Ruleset 1.0.0 Candidate.
 
 FASE 17
+
 Ejecutar pruebas sobre Ruleset Candidate.
 
 FASE 18
+
 Corregir inconsistencias.
 
 FASE 19
+
 Construir interfaz.
 
 FASE 20
+
 Completar reportes y dashboard.
 
 FASE 21
+
 Realizar pruebas integrales.
 
 FASE 22
+
 Crear TEST_REPORT.md.
 
 FASE 23
+
 Generar entregable final.
+
 
 
 No me pidas autorización después de cada fase.
@@ -1937,8 +3041,11 @@ No me pidas autorización después de cada fase.
 Continúa autónomamente mientras la decisión sea técnica y reversible.
 
 
+
 ======================================================================
+
 14. REGLAS IMPORTANTES PARA CODEX
+
 ======================================================================
 
 1. NO inventes evidencia.
@@ -1946,6 +3053,7 @@ Continúa autónomamente mientras la decisión sea técnica y reversible.
 2. NO inventes referencias.
 
 3. NO conviertas automáticamente conocimiento interno del modelo en una regla
+
 de producción.
 
 4. INVESTIGA antes de establecer parámetros deportivos importantes.
@@ -1960,7 +3068,7 @@ de producción.
 
 9. Si la literatura contradice una regla propuesta, documenta el conflicto.
 
-10. No escondas decisiones deportivas dentro de VBA.
+10. No escondas decisiones deportivas dentro del código Python.
 
 11. Los números modificables pertenecen a parámetros o reglas.
 
@@ -1973,8 +3081,11 @@ de producción.
 15. Cada decisión importante debe poder explicarse.
 
 
+
 ======================================================================
+
 15. INSTRUCCIÓN FINAL
+
 ======================================================================
 
 Empieza ahora.
@@ -1986,10 +3097,15 @@ Trabaja directamente sobre el proyecto.
 Primero genera y muestra brevemente:
 
 1. matriz de requerimientos funcionales;
+
 2. arquitectura;
+
 3. modelo de datos;
+
 4. diseño del Rule Engine;
+
 5. estrategia de investigación;
+
 6. estrategia de versionado.
 
 Después comienza a crear los archivos sin esperar otra autorización.
@@ -1997,16 +3113,23 @@ Después comienza a crear los archivos sin esperar otra autorización.
 Antes de declarar terminado el proyecto:
 
 - ejecuta tests;
+
 - verifica referencias;
+
 - revisa Rule → Evidence;
+
 - comprueba trazabilidad;
-- revisa el archivo Excel;
+
+- ejecuta y revisa la aplicación empaquetada;
+
 - documenta limitaciones reales.
 
 No declares una regla "basada en evidencia" si no puedes mostrar exactamente
+
 qué evidencia la respalda.
 
-El objetivo no es solamente construir un Excel que genere entrenamientos.
+El objetivo no es solamente construir una aplicación que genere entrenamientos.
 
 El objetivo es construir un SISTEMA DE PRESCRIPCIÓN VERSIONADO,
-AUDITABLE, EXPLICABLE Y ACTUALIZABLE EN FUNCIÓN DE LA EVIDENCIA.
+
+AUDITABLE, EXPLICABLE Y ACTUALIZABLE EN FUNCIÓN DE LA EVIDENCIA
