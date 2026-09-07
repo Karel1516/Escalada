@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["source_id", "source_type", "authors", "title", "year", "url", "accessed_date", "evidence_level", "climbing_specific", "main_finding", "limitations"],
+    "properties": {
+      "source_id": {"type": "string", "minLength": 1},
+      "source_type": {"type": "string", "minLength": 1},
+      "authors": {"type": "string", "minLength": 1},
+      "title": {"type": "string", "minLength": 1},
+      "year": {"type": "integer", "minimum": 1900, "maximum": 2100},
+      "doi": {"type": ["string", "null"]},
+      "pmid": {"type": ["string", "null"], "pattern": "^[0-9]*$"},
+      "url": {"type": "string", "minLength": 1},
+      "accessed_date": {"type": "string", "format": "date"},
+      "evidence_level": {"type": "string", "minLength": 1},
+      "climbing_specific": {"type": "boolean"},
+      "main_finding": {"type": "string", "minLength": 1},
+      "limitations": {"type": "string", "minLength": 1}
+    },
+    "additionalProperties": true
+  }
+}

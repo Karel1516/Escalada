@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "main.py", line 29, in main
+  File "climber_training\infrastructure\migrations.py", line 38, in migrate_database
+  File "alembic\command.py", line 487, in upgrade
+  File "alembic\script\base.py", line 550, in run_env
+  File "alembic\util\pyfiles.py", line 114, in load_python_file
+  File "alembic\util\pyfiles.py", line 132, in load_module_py
+  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "C:\Users\padil\AppData\Local\Temp\_MEI00001ca42\alembic\env.py", line 1, in <module>
+    from logging.config import fileConfig
+ModuleNotFoundError: No module named 'logging.config'

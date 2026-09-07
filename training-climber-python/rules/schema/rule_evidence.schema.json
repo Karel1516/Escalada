@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["rule_id", "source_id", "relation_type", "evidence_strength", "notes"],
+    "properties": {
+      "rule_id": {"type": "string", "minLength": 1},
+      "source_id": {"type": "string", "minLength": 1},
+      "relation_type": {"enum": ["DIRECT_SUPPORT", "INDIRECT_SUPPORT", "BACKGROUND", "CONTRADICTS", "SAFETY", "RATIONALE"]},
+      "evidence_strength": {"type": "string", "minLength": 1},
+      "notes": {"type": ["string", "null"]}
+    },
+    "additionalProperties": true
+  }
+}

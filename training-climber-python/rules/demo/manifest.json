@@ -1,0 +1,16 @@
+{
+  "package_id": "climber-training-demo",
+  "version": "0.1.0-demo",
+  "status": "TESTING",
+  "schema_version": "1.0.0",
+  "created_at": "2026-09-06T00:00:00Z",
+  "checksums": {
+    "evidence.json": "0aa737db4793fbb9999229715363432eed7b3c7b514fccf5b596f16265a8a7c4",
+    "exercises.json": "428378b044c9ab971606f1bf128f3f5207b3e771180dc5132aa4fe8e86bd202d",
+    "parameters.json": "ab63facc0df0dd40c23282f3744fc8c34fdbcc9c83324b2cd0c43ed63c18426b",
+    "rule_evidence.json": "12e0398a470a5e0a5535dacece93176141ddf9d28c98fcf4f2d3c1cb411bfd6e",
+    "rules.json": "c78298625ea08bbdd03489f6bb55561fcbce5c78e452c26d9bac6d0d8bcfdbe9"
+  },
+  "compatibility": {"application": ">=0.1.0,<1.0.0"},
+  "purpose": "Validación técnica; no es una prescripción deportiva validada."
+}

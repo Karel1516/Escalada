@@ -1,0 +1,3 @@
+[
+  {"parameter_id": "SESSION_TIME_CAP_MIN", "category": "scheduling", "value": 60, "unit": "minutes", "classification": "DESIGN_DECISION"}
+]

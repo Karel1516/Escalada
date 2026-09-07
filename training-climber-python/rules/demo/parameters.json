@@ -1,0 +1,4 @@
+[
+  {"parameter_id": "DEMO_SETS", "category": "volume", "value": 3, "unit": "sets", "classification": "DESIGN_DECISION"},
+  {"parameter_id": "DEMO_REST_SECONDS", "category": "rest", "value": 180, "unit": "seconds", "classification": "DESIGN_DECISION"}
+]

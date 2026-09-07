@@ -1,0 +1,3 @@
+[
+  {"source_id": "DESIGN-001", "source_type": "DESIGN_DECISION", "authors": "Equipo del proyecto", "title": "Caso sintético para probar el motor", "year": 2026, "journal": null, "doi": null, "pmid": null, "url": "local:docs/RULE_ENGINE.md", "accessed_date": "2026-09-06", "evidence_level": "NOT_SPORTS_EVIDENCE", "climbing_specific": false, "main_finding": "Permite probar precedencia y trazabilidad.", "limitations": "No fundamenta una prescripción deportiva."}
+]

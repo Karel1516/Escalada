@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["exercise_id", "name", "category", "objective", "equipment", "contraindications", "prescription_unit"],
+    "properties": {
+      "exercise_id": {"type": "string", "minLength": 1},
+      "name": {"type": "string", "minLength": 1},
+      "category": {"type": "string", "minLength": 1},
+      "objective": {"type": "string", "minLength": 1},
+      "equipment": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+      "contraindications": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+      "prescription_unit": {"type": "string", "minLength": 1}
+    },
+    "additionalProperties": true
+  }
+}

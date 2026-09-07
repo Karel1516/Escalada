@@ -1,0 +1,6 @@
+[
+  {"exercise_id": "CLIMBING_PRACTICE", "name": "Práctica de escalada", "category": "escalada_especifica", "objective": "general", "equipment": ["wall"], "contraindications": [], "prescription_unit": "minutes"},
+  {"exercise_id": "FINGER_RESISTANCE", "name": "Fuerza específica de flexores", "category": "finger_strength", "objective": "finger_strength", "equipment": ["hangboard"], "contraindications": ["finger_pain", "finger_injury"], "prescription_unit": "rule_defined"},
+  {"exercise_id": "FINGER_ENDURANCE", "name": "Resistencia intermitente de flexores", "category": "resistencia", "objective": "resistencia", "equipment": ["hangboard"], "contraindications": ["finger_pain", "finger_injury"], "prescription_unit": "rule_defined"},
+  {"exercise_id": "CAMPUS_POWER", "name": "Campus board orientado a potencia", "category": "potencia", "objective": "potencia", "equipment": ["campus_board"], "contraindications": ["finger_pain", "finger_injury", "shoulder_pain", "elbow_pain"], "prescription_unit": "rule_defined"}
+]

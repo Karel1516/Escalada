@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://climber-training.local/schemas/package.schema.json",
+  "title": "Climber Training rule package",
+  "type": "object",
+  "required": ["package_id", "version", "status", "schema_version", "created_at", "checksums", "compatibility"],
+  "properties": {
+    "package_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$"},
+    "status": {"enum": ["DRAFT", "RESEARCH", "TESTING", "ACTIVE", "DEPRECATED", "ARCHIVED"]},
+    "schema_version": {"type": "string"},
+    "created_at": {"type": "string"},
+    "checksums": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "compatibility": {"type": "object"}
+  },
+  "additionalProperties": true
+}

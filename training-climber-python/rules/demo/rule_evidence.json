@@ -1,0 +1,8 @@
+[
+  {"rule_id": "DEMO-SELECT-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Prueba técnica."},
+  {"rule_id": "DEMO-SAFETY-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Precaución, no regla clínica."},
+  {"rule_id": "DEMO-BASE-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Prueba técnica."},
+  {"rule_id": "DEMO-FEEDBACK-PROGRESS-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Umbral sintético, no prescriptivo."},
+  {"rule_id": "DEMO-FEEDBACK-DELOAD-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Umbral sintético, no prescriptivo."},
+  {"rule_id": "DEMO-FEEDBACK-PAIN-001", "source_id": "DESIGN-001", "relation_type": "RATIONALE", "evidence_strength": "NOT_APPLICABLE", "notes": "Precaución sintética."}
+]

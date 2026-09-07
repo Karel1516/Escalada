@@ -1,0 +1,13 @@
+{
+  "package_id": "climber-training", "version": "1.0.0-candidate", "status": "RESEARCH",
+  "schema_version": "1.0.0", "created_at": "2026-09-06T00:00:00Z",
+  "checksums": {
+    "evidence.json": "8b48a2430c1efae8d61330ef831dd5fbc77249fb4b2a6da025e3d9e7028540c6",
+    "exercises.json": "a7e351fce77a6c6889daebfaad193187d720a271495f88bb9ba2335240821bd6",
+    "parameters.json": "4a09b0a625ba36572df7b3543c1955d8285f5c9bb09d02fab96a362f51281fb9",
+    "rule_evidence.json": "1929bb29f9290365d56b889bcdd7d15a52e5b76ceb3fe795ebd61eeba07e25f6",
+    "rules.json": "67447c1c7913e6d5a0b194fc3363ca3dc788071cd88d93c483bb2ac9645107eb"
+  },
+  "compatibility": {"application": ">=0.1.0,<1.0.0"},
+  "purpose": "Candidato sujeto a revisión experta y validación; no activable por defecto."
+}

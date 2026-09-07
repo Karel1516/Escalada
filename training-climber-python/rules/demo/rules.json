@@ -1,0 +1,38 @@
+[
+  {
+    "rule_id": "DEMO-SELECT-001", "rule_type": "EXERCISE_SELECTION", "priority": 100,
+    "condition": {"combinator": "AND", "conditions": [{"field": "equipment.hangboard", "operator": "EQ", "value": true}, {"field": "objective", "operator": "EQ", "value": "finger_strength"}]},
+    "actions": [{"action_type": "INCLUDE_EXERCISE", "target": "DEMO_HANG"}, {"action_type": "SET_SETS", "target": "DEMO_HANG.sets", "parameter_id": "DEMO_SETS"}, {"action_type": "SET_REST", "target": "DEMO_HANG.rest_seconds", "parameter_id": "DEMO_REST_SECONDS"}],
+    "rationale": "Caso sintético para verificar condiciones compuestas y parámetros.", "classification": "DESIGN_DECISION", "evidence_status": "NOT_APPLICABLE"
+  },
+  {
+    "rule_id": "DEMO-SAFETY-001", "rule_type": "SAFETY", "priority": 1000,
+    "condition": {"field": "limitations.fingers", "operator": "IN", "value": ["limitacion", "lesion_rehabilitacion"]},
+    "actions": [{"action_type": "EXCLUDE_EXERCISE", "target": "DEMO_HANG"}, {"action_type": "BLOCK_PROGRESSION", "target": "finger_loading", "value": true}, {"action_type": "SHOW_WARNING", "target": "finger_warning", "value": "Se bloqueó la carga específica de dedos. Esta aplicación no diagnostica; busca valoración profesional."}],
+    "rationale": "Precaución conservadora que demuestra que Safety prevalece.", "classification": "SAFETY_PRECAUTION", "evidence_status": "HEURISTIC"
+  },
+  {
+    "rule_id": "DEMO-BASE-001", "rule_type": "PRESCRIPTION", "priority": 10,
+    "condition": {"field": "equipment.wall", "operator": "EQ", "value": true},
+    "actions": [{"action_type": "INCLUDE_EXERCISE", "target": "DEMO_EASY_CLIMBING"}],
+    "rationale": "Contenido neutro para generar una sesión durante pruebas.", "classification": "DESIGN_DECISION", "evidence_status": "NOT_APPLICABLE"
+  },
+  {
+    "rule_id": "DEMO-FEEDBACK-PROGRESS-001", "rule_type": "PROGRESSION", "priority": 50,
+    "condition": {"combinator": "AND", "conditions": [{"field": "feedback.completion_percent", "operator": "GTE", "value": 90}, {"field": "feedback.rpe", "operator": "LTE", "value": 8}, {"field": "feedback.pain", "operator": "LTE", "value": 2}]},
+    "actions": [{"action_type": "ALLOW_PROGRESSION", "target": "progression.decision", "value": "PROGRESS"}],
+    "rationale": "Caso sintético para verificar adaptación por feedback; no es un umbral deportivo.", "classification": "DESIGN_DECISION", "evidence_status": "NOT_APPLICABLE"
+  },
+  {
+    "rule_id": "DEMO-FEEDBACK-DELOAD-001", "rule_type": "DELOAD", "priority": 200,
+    "condition": {"field": "feedback.fatigue", "operator": "GTE", "value": 8},
+    "actions": [{"action_type": "TRIGGER_DELOAD", "target": "progression.deload"}],
+    "rationale": "Caso sintético para verificar la rama DELOAD.", "classification": "DESIGN_DECISION", "evidence_status": "NOT_APPLICABLE"
+  },
+  {
+    "rule_id": "DEMO-FEEDBACK-PAIN-001", "rule_type": "SAFETY", "priority": 1100,
+    "condition": {"field": "feedback.pain", "operator": "GTE", "value": 4},
+    "actions": [{"action_type": "BLOCK_PROGRESSION", "target": "progression.decision", "value": "STOP"}, {"action_type": "TRIGGER_REEVALUATION", "target": "progression.reevaluate"}, {"action_type": "SHOW_WARNING", "target": "pain_warning", "value": "La progresión se detuvo por dolor registrado; busca valoración profesional si persiste o preocupa."}],
+    "rationale": "Precaución sintética para verificar que Safety domina la progresión.", "classification": "SAFETY_PRECAUTION", "evidence_status": "HEURISTIC"
+  }
+]

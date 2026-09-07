@@ -1,0 +1,12 @@
+[
+  {"rule_id": "CANDIDATE-SAFETY-FINGER-001", "source_id": "WOOLLINGS-2015", "relation_type": "SAFETY", "evidence_strength": "LIMITED", "notes": "Apoya cautela general, no un protocolo clínico."},
+  {"rule_id": "CANDIDATE-SAFETY-FINGER-001", "source_id": "SJOMAN-2023", "relation_type": "SAFETY", "evidence_strength": "LIMITED", "notes": "Observacional; no causal."},
+  {"rule_id": "CANDIDATE-FINGER-ELIGIBILITY-001", "source_id": "STIEN-2023", "relation_type": "INDIRECT_SUPPORT", "evidence_strength": "MODERATE", "notes": "Apoya la categoría de entrenamiento, no el umbral de dos años."},
+  {"rule_id": "CANDIDATE-FINGER-ELIGIBILITY-001", "source_id": "SJOMAN-2023", "relation_type": "BACKGROUND", "evidence_strength": "LOW", "notes": "El umbral sigue siendo heurístico."},
+  {"rule_id": "CANDIDATE-FINGER-ELIGIBILITY-001", "source_id": "LANGER-STRENGTH-2023", "relation_type": "DIRECT_SUPPORT", "evidence_strength": "MODERATE", "notes": "Apoya entrenamiento de fuerza, no una dosis única."},
+  {"rule_id": "CANDIDATE-CLIMBING-001", "source_id": "STIEN-2023", "relation_type": "BACKGROUND", "evidence_strength": "LIMITED", "notes": "No prescribe dosis."},
+  {"rule_id": "CANDIDATE-SAFETY-FINGER-001", "source_id": "QUARMBY-2023", "relation_type": "SAFETY", "evidence_strength": "LIMITED", "notes": "La asociación no produce un umbral seguro."},
+  {"rule_id": "CANDIDATE-FINGER-ENDURANCE-001", "source_id": "LOPEZ-RIVERA-2019", "relation_type": "DIRECT_SUPPORT", "evidence_strength": "LIMITED", "notes": "Población avanzada; no se extrapola a principiantes."},
+  {"rule_id": "CANDIDATE-FINGER-ENDURANCE-001", "source_id": "LANGER-STRENGTH-2023", "relation_type": "BACKGROUND", "evidence_strength": "MODERATE", "notes": "Síntesis general; protocolos heterogéneos."},
+  {"rule_id": "CANDIDATE-CAMPUS-ELIGIBILITY-001", "source_id": "STIEN-CAMPUS-2021", "relation_type": "DIRECT_SUPPORT", "evidence_strength": "LIMITED", "notes": "Ensayo pequeño de avanzados/élite; selección, no seguridad ni dosis."}
+]

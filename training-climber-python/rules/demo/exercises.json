@@ -1,0 +1,4 @@
+[
+  {"exercise_id": "DEMO_EASY_CLIMBING", "name": "Escalada fácil DEMO", "category": "escalada_especifica", "objective": "demo", "equipment": ["wall"], "contraindications": [], "prescription_unit": "minutes"},
+  {"exercise_id": "DEMO_HANG", "name": "Suspensión DEMO (no prescriptiva)", "category": "finger_strength", "objective": "demo", "equipment": ["hangboard"], "contraindications": ["finger_pain"], "prescription_unit": "seconds"}
+]

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["parameter_id", "category", "value", "unit", "classification"],
+    "properties": {
+      "parameter_id": {"type": "string", "minLength": 1},
+      "category": {"type": "string", "minLength": 1},
+      "value": {},
+      "unit": {"type": ["string", "null"]},
+      "classification": {"type": "string", "minLength": 1}
+    },
+    "additionalProperties": true
+  }
+}
